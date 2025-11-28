@@ -1,39 +1,52 @@
 package com.example.projectaws.model;
+
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+@Entity
+@Table(name = "teachers")
 public class Profesor {
 
-    @NotNull(message = "El ID es obligatorio")
-    @Min(value = 1, message = "El ID debe ser un entero positivo")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "El número de empleado debe ser un entero válido.")
-    @Min(value = 1, message = "El número de empleado debe ser un entero positivo.")
+    @NotNull(message = "El número de empleado debe ser válido.")
+    @Min(value = 1, message = "El número de empleado debe ser positivo.")
     private Integer numeroEmpleado;
 
-    @NotBlank(message = "El nombre es obligatorio y debe ser un texto válido.")
+    @NotBlank(message = "El nombre es obligatorio.")
     private String nombres;
 
-    @NotBlank(message = "Los apellidos son obligatorios y deben ser un texto válido.")
+    @NotBlank(message = "Los apellidos son obligatorios.")
     private String apellidos;
 
-    @NotNull(message = "Las horas de clase deben ser un número válido.")
-    @Min(value = 0, message = "Las horas de clase deben ser positivas.")
+    @NotNull(message = "Las horas de clase son obligatorias.")
+    @Min(value = 0, message = "Las horas deben ser positivas.")
     private Integer horasClase;
 
     public Profesor() {}
 
-    // Getters
-    public int getId() { return id; }
-    public Integer getNumeroEmpleado() { return numeroEmpleado; }
-    public String getNombres() { return nombres; }
-    public String getApellidos() { return apellidos; }
-    public Integer getHorasClase() { return horasClase; }
+    public Profesor(Integer numeroEmpleado, String nombres, String apellidos, Integer horasClase) {
+        this.numeroEmpleado = numeroEmpleado;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.horasClase = horasClase;
+    }
 
-    // Setters
-    public void setId(int id) { this.id = id; }
+    // Getters y Setters
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+
+    public Integer getNumeroEmpleado() { return numeroEmpleado; }
     public void setNumeroEmpleado(Integer numeroEmpleado) { this.numeroEmpleado = numeroEmpleado; }
+
+    public String getNombres() { return nombres; }
     public void setNombres(String nombres) { this.nombres = nombres; }
+
+    public String getApellidos() { return apellidos; }
     public void setApellidos(String apellidos) { this.apellidos = apellidos; }
+
+    public Integer getHorasClase() { return horasClase; }
     public void setHorasClase(Integer horasClase) { this.horasClase = horasClase; }
 }
